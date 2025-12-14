@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { ArrowRight, Loader2, Check } from 'lucide-react';
+import { ArrowRight, Loader2, Check, AlertTriangle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const ProgressiveForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'error'>('idle');
   const [formData, setFormData] = useState({ email: '', name: '', details: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('idle');
+    
     if (step === 1) {
       if (formData.email) setStep(2);
     } else {
@@ -30,7 +33,7 @@ export const ProgressiveForm: React.FC = () => {
           throw new Error("Transmission Protocol Failed");
         }
       } catch (error) {
-        alert("System Error: Unable to transmit audit request. Please try again.");
+        setStatus('error');
       } finally {
         setLoading(false);
       }
@@ -109,18 +112,31 @@ export const ProgressiveForm: React.FC = () => {
             )}
         </AnimatePresence>
 
-        <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-foreground text-background font-bold py-3 mt-2 border-2 border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-            {loading ? <Loader2 className="animate-spin" /> : (
-                <>
-                    {step === 1 ? 'CONTINUE' : 'DEPLOY REQUEST'}
-                    <ArrowRight size={18} />
-                </>
+        <div className="flex flex-col gap-2">
+            <button 
+                type="submit" 
+                disabled={loading}
+                className="w-full flex items-center justify-center gap-2 bg-foreground text-background font-bold py-3 mt-2 border-2 border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+                {loading ? <Loader2 className="animate-spin" /> : (
+                    <>
+                        {step === 1 ? 'CONTINUE' : 'DEPLOY REQUEST'}
+                        <ArrowRight size={18} />
+                    </>
+                )}
+            </button>
+            
+            {status === 'error' && (
+                <motion.div 
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 text-xs text-red-500 font-bold bg-red-50 p-2 border border-red-200"
+                >
+                    <AlertTriangle size={14} />
+                    <span>TRANSMISSION FAILED. VERIFY CONNECTION.</span>
+                </motion.div>
             )}
-        </button>
+        </div>
       </form>
     </div>
   );

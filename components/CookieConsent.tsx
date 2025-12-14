@@ -41,13 +41,13 @@ export const CookieConsent: React.FC = () => {
             <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => handleConsent('rejected')}
-                className="px-4 py-2 text-xs font-bold border-2 border-foreground hover:bg-secondary transition-colors uppercase"
+                className="px-4 py-2 text-xs font-bold border-2 border-foreground hover:bg-secondary transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 Opt-out
               </button>
               <button
                 onClick={() => handleConsent('accepted')}
-                className="px-4 py-2 text-xs font-bold bg-foreground text-background border-2 border-foreground hover:bg-background hover:text-foreground transition-colors uppercase shadow-neo-sm hover:shadow-none hover:translate-y-0.5 active:translate-y-1"
+                className="px-4 py-2 text-xs font-bold bg-foreground text-background border-2 border-foreground hover:bg-background hover:text-foreground transition-colors uppercase shadow-neo-sm hover:shadow-none hover:translate-y-0.5 active:translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 Acknowledge
               </button>
