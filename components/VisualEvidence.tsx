@@ -1,5 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Activity } from 'lucide-react'; // Ensure lucide-react is installed
 
 const data = [
   { name: 'Jan', efficiency: 40, cost: 80 },
@@ -12,11 +13,25 @@ const data = [
 
 export const VisualEvidence: React.FC = () => {
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="mb-4">
-        <h3 className="text-2xl font-bold">IMPACT VELOCITY</h3>
+    <div className="w-full h-full flex flex-col relative">
+      {/* Live Status Indicator - New Addition */}
+      <div className="absolute top-0 right-0 flex items-center gap-1.5 px-2 py-1 bg-background/80 border border-foreground/20 text-[10px] font-mono font-bold z-10 backdrop-blur-sm">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        SYSTEM OPTIMAL
+      </div>
+
+      <div className="mb-4 pr-16"> {/* Padding for the badge */}
+        <h3 className="text-2xl font-bold flex items-center gap-2">
+            IMPACT VELOCITY
+            <Activity size={18} className="text-primary animate-pulse" />
+        </h3>
         <p className="text-sm text-foreground/70 font-mono">Real-time optimization metrics</p>
       </div>
+      
+      {/* Existing Chart Code... */}
       <div className="flex-1 w-full min-h-[150px]">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
@@ -39,7 +54,9 @@ export const VisualEvidence: React.FC = () => {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-      <div className="flex justify-between text-xs font-mono mt-2">
+      {/* ... End Chart Code */}
+      
+      <div className="flex justify-between text-xs font-mono mt-2 border-t border-foreground/10 pt-2">
         <div className="flex items-center gap-2">
            <span className="w-3 h-3 bg-primary/20 border border-primary"></span>
            EFFICIENCY

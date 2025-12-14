@@ -3,32 +3,60 @@ import React, { useEffect } from 'react';
 const JsonLd: React.FC = () => {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Systematic Authority",
-    "url": "https://systematic-authority.com",
-    "logo": "https://systematic-authority.com/logo.png",
-    "description": "Scaling SME Efficiency through AI Systems and Neuro-symbolic frameworks.",
-    "founder": {
-      "@type": "Person",
-      "name": "Alex System",
-      "sameAs": [
-        "https://www.linkedin.com/in/alexsystem",
-        "https://twitter.com/alexsystem"
-      ]
-    },
-    "knowsAbout": ["Artificial Intelligence", "System Architecture", "Business Automation", "Next.js Performance"],
-    "review": {
-        "@type": "Review",
-        "author": {
-            "@type": "Person",
-            "name": "Trusted Industry Expert"
-        },
-        "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Systematic Authority",
+        "url": "https://systematic-authority.com",
+        "logo": "https://systematic-authority.com/logo.png",
+        "description": "Scaling SME Efficiency through autonomous neuro-symbolic frameworks.",
+        "sameAs": [
+          "https://www.linkedin.com/in/alexsystem",
+          "https://twitter.com/alexsystem"
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "Neuro-Symbolic Automation Audit",
+        "provider": { "@type": "Organization", "name": "Systematic Authority" },
+        "description": "Deconstructs manual workflows into atomic units for AI agent deployment.",
+        "areaServed": "Global",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Automation Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "72-Hour Workflow Decomposition"
+              }
+            }
+          ]
         }
-    }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does Neuro-Symbolic AI differ from standard automation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unlike standard scripts, Neuro-Symbolic AI combines the reasoning capabilities of LLMs with the deterministic reliability of code execution, allowing for self-healing workflows."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the timeline for system deployment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most systems reach initial operational capability within 30 days, with an audit completed in the first 72 hours."
+            }
+          }
+        ]
+      }
+    ]
   };
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
+import { Quote, BadgeCheck } from 'lucide-react'; // Import BadgeCheck
 import { Testimonial } from '../types';
 
 export const WallOfLove: React.FC = () => {
@@ -10,16 +10,29 @@ export const WallOfLove: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col">
-       <div className="flex items-center gap-2 mb-4">
-          <Quote className="text-accent fill-accent" size={24} />
-          <h3 className="text-lg font-bold">TRUST SIGNALS</h3>
+       <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Quote className="text-accent fill-accent" size={24} />
+            <h3 className="text-lg font-bold">TRUST SIGNAL</h3>
+          </div>
+          {/* Social Proof Aggregate */}
+          <div className="text-[10px] font-mono opacity-60 border-b border-foreground">
+            100% VERIFIED CLIENTS
+          </div>
        </div>
+       
        <div className="flex-1 flex flex-col gap-4 overflow-y-auto no-scrollbar">
           {reviews.map((r) => (
-             <div key={r.id} className="bg-secondary p-4 border-l-4 border-foreground">
-                <p className="text-sm italic mb-2">"{r.text}"</p>
-                <div className="text-xs font-bold">
-                   {r.author} // <span className="text-foreground/70">{r.role} @ {r.company}</span>
+             <div key={r.id} className="bg-secondary p-4 border-l-4 border-foreground group hover:bg-background transition-colors relative">
+                {/* Verification Badge */}
+                <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-100 transition-opacity">
+                    <BadgeCheck size={16} className="text-primary" />
+                </div>
+                
+                <p className="text-sm italic mb-2 leading-relaxed">"{r.text}"</p>
+                <div className="flex flex-col">
+                   <span className="text-xs font-bold uppercase">{r.author}</span>
+                   <span className="text-[10px] text-foreground/70 font-mono">{r.role} @ {r.company}</span>
                 </div>
              </div>
           ))}
