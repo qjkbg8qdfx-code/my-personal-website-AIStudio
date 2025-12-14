@@ -14,10 +14,26 @@ export const ProgressiveForm: React.FC = () => {
       if (formData.email) setStep(2);
     } else {
       setLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setLoading(false);
-      setCompleted(true);
+      
+      try {
+        const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          setCompleted(true);
+        } else {
+          throw new Error("Transmission Protocol Failed");
+        }
+      } catch (error) {
+        alert("System Error: Unable to transmit audit request. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

@@ -8,6 +8,7 @@ import { Methodology } from './components/Methodology';
 import { ProgressiveForm } from './components/ProgressiveForm';
 import { WallOfLove } from './components/WallOfLove';
 import JsonLd from './components/JsonLd';
+import { CookieConsent } from './components/CookieConsent';
 import { MoveRight, Globe, ShieldCheck } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -71,10 +72,11 @@ const App: React.FC = () => {
         </BentoGrid>
       </main>
 
+      <CookieConsent />
       <BottomNav />
       
       <footer className="hidden md:block py-12 text-center text-sm font-mono text-foreground/50">
-        <p>&copy; 2025 SYSTEMATIC AUTHORITY. ALL RIGHTS RESERVED.</p>
+        <p>&copy; {new Date().getFullYear()} SYSTEMATIC AUTHORITY. ALL RIGHTS RESERVED.</p>
         <div className="flex justify-center gap-4 mt-2">
             <a href="#" className="hover:text-foreground transition-colors">PRIVACY</a>
             <a href="#" className="hover:text-foreground transition-colors">TERMS</a>
