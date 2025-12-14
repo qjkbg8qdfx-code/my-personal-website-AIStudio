@@ -35,46 +35,53 @@ export const MiniAuditTool: React.FC = () => {
     };
 
     return (
-        <div className="h-full flex flex-col relative overflow-hidden bg-background">
+        <div className="h-full flex flex-col relative overflow-hidden bg-[#09090b] text-white p-6 selection:bg-white selection:text-black">
             {/* Header */}
-            <div className="mb-4">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                    <Terminal size={20} className="text-primary" />
-                    TRUST ENGINE
-                </h3>
-                <p className="text-xs text-foreground/60 font-mono">AI-POWERED MATURITY AUDIT</p>
+            <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <h3 className="text-xl font-bold flex items-center gap-2 font-mono tracking-tighter">
+                        <Terminal size={20} className="text-white" />
+                        TRUST_ENGINE.exe
+                    </h3>
+                    <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest mt-1">v2.0.4 // SYSTEM_READY</p>
+                </div>
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
             </div>
 
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col font-mono relative">
                 <AnimatePresence mode="wait">
                     {status === 'input' && (
                         <motion.form
                             key="input"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0, filter: "blur(4px)" }}
                             onSubmit={handleSubmit}
-                            className="flex-1 flex flex-col justify-between gap-4"
+                            className="flex-1 flex flex-col justify-between"
                         >
-                            <div className="space-y-3">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold uppercase ml-1">Industry Sector</label>
+                            <div className="space-y-6">
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-bold uppercase text-zinc-500 group-focus-within:text-white transition-colors">
+                                        &gt; INPUT_SECTOR
+                                    </label>
                                     <input
                                         type="text"
                                         required
-                                        placeholder="e.g. Fintech, SaaS, Logistics"
-                                        className="w-full bg-background border-2 border-foreground/20 focus:border-primary p-2 font-mono text-sm focus:outline-none transition-all"
+                                        placeholder="e.g. Fintech..."
+                                        className="w-full bg-zinc-900/50 text-white placeholder:text-zinc-700 p-3 text-sm focus:outline-none focus:bg-zinc-900 transition-all border-b border-zinc-800 focus:border-white"
                                         value={formData.industry}
                                         onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                                     />
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold uppercase ml-1">Biggest Bottleneck</label>
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-bold uppercase text-zinc-500 group-focus-within:text-white transition-colors">
+                                        &gt; IDENTIFY_BOTTLENECK
+                                    </label>
                                     <input
                                         type="text"
                                         required
-                                        placeholder="e.g. Manual Data Entry, Lead Qual"
-                                        className="w-full bg-background border-2 border-foreground/20 focus:border-primary p-2 font-mono text-sm focus:outline-none transition-all"
+                                        placeholder="e.g. Data Redundancy..."
+                                        className="w-full bg-zinc-900/50 text-white placeholder:text-zinc-700 p-3 text-sm focus:outline-none focus:bg-zinc-900 transition-all border-b border-zinc-800 focus:border-white"
                                         value={formData.bottleneck}
                                         onChange={(e) => setFormData({ ...formData, bottleneck: e.target.value })}
                                     />
@@ -83,10 +90,10 @@ export const MiniAuditTool: React.FC = () => {
 
                             <button
                                 type="submit"
-                                className="w-full flex items-center justify-center gap-2 bg-foreground text-background font-bold py-3 border-2 border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all focus:outline-none focus:ring-2 focus:ring-primary"
+                                className="w-full mt-4 bg-white text-black font-bold py-3 hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 uppercase tracking-wide text-sm"
                             >
-                                RUN DIAGNOSTIC
-                                <Zap size={18} fill="currentColor" />
+                                <Zap size={16} className="fill-black" />
+                                Initiate_Diagnostic
                             </button>
                         </motion.form>
                     )}
@@ -97,15 +104,17 @@ export const MiniAuditTool: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="flex-1 flex flex-col items-center justify-center text-center space-y-4"
+                            className="flex-1 flex flex-col items-center justify-center text-center space-y-6"
                         >
                             <div className="relative">
-                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse"></div>
-                                <Loader2 size={48} className="animate-spin text-primary relative z-10" />
+                                <Loader2 size={48} className="animate-spin text-white opacity-20" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-2 h-2 bg-white animate-ping rounded-full"></div>
+                                </div>
                             </div>
-                            <div className="space-y-1 font-mono text-sm">
-                                <p className="animate-pulse">ANALYZING WORKFLOW TOPOLOGY...</p>
-                                <p className="text-xs text-foreground/50">Querying Neural Knowledge Base</p>
+                            <div className="space-y-1 font-mono text-xs">
+                                <p className="animate-pulse text-white">&gt; ANALYZING_TOPOLOGY...</p>
+                                <p className="text-zinc-600">Reading neural parameters...</p>
                             </div>
                         </motion.div>
                     )}
@@ -113,46 +122,43 @@ export const MiniAuditTool: React.FC = () => {
                     {status === 'result' && result && (
                         <motion.div
                             key="result"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
                             className="flex-1 flex flex-col h-full"
                         >
-                            <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-                                <div className="flex items-center justify-between border-b-2 border-foreground/10 pb-2">
-                                    <span className="text-xs font-bold uppercase text-foreground/60">Maturity Score</span>
-                                    <div className="flex items-center gap-2">
-                                        <BarChart3 size={16} className="text-primary" />
-                                        <span className="text-2xl font-black">{result.score}/100</span>
-                                    </div>
-                                </div>
-
-                                <div className="bg-secondary/30 p-3 border-l-4 border-primary">
-                                    <span className="text-xs font-bold uppercase text-primary flex items-center gap-1 mb-1">
-                                        <Target size={12} />
-                                        DIAGNOSIS
-                                    </span>
-                                    <p className="text-xs font-bold leading-snug">
-                                        {result.analysis}
-                                    </p>
+                            <div className="flex-1 space-y-4 overflow-y-auto pr-1 custom-scrollbar">
+                                <div className="flex items-end justify-between border-b border-white/10 pb-2">
+                                    <span className="text-[10px] text-zinc-500 uppercase">Efficiency_Score</span>
+                                    <span className="text-4xl font-black text-white">{result.score}<span className="text-lg text-zinc-600">/100</span></span>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <span className="text-[10px] font-bold uppercase text-foreground/50">Tactical Implementations</span>
+                                    <span className="text-[10px] text-zinc-500 uppercase flex items-center gap-1">
+                                        <Target size={10} />
+                                        Primary_Diagnosis
+                                    </span>
+                                    <p className="text-sm font-bold leading-relaxed text-zinc-300 border-l-2 border-white pl-3">
+                                        "{result.analysis}"
+                                    </p>
+                                </div>
+
+                                <div className="space-y-2 pt-2">
+                                    <span className="text-[10px] text-zinc-500 uppercase">Optimization_Protocol</span>
                                     {result.recommendations.map((rec, i) => (
-                                        <div key={i} className="flex gap-2 items-start text-xs border border-foreground/10 p-2 bg-background">
-                                            <CheckCircle2 size={12} className="text-accent mt-0.5 shrink-0" />
+                                        <div key={i} className="flex gap-3 items-start text-xs text-zinc-400 bg-white/5 p-3 hover:bg-white/10 transition-colors">
+                                            <span className="text-white font-bold shrink-0">0{i + 1}</span>
                                             <span>{rec}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="mt-3">
-                                <button className="w-full group bg-primary text-white font-bold py-2.5 px-4 flex items-center justify-between border-2 border-primary hover:bg-transparent hover:text-primary transition-colors text-sm">
-                                    <span>GET FULL ROADMAP</span>
-                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                                </button>
-                            </div>
+                            <button
+                                className="w-full bg-white text-black font-bold py-3 mt-4 hover:bg-zinc-200 transition-colors flex items-center justify-between px-4 uppercase text-xs tracking-wider"
+                            >
+                                <span>Download_Report.pdf</span>
+                                <ArrowRight size={14} />
+                            </button>
                         </motion.div>
                     )}
                 </AnimatePresence>
