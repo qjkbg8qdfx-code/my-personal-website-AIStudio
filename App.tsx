@@ -25,7 +25,7 @@ const App: React.FC = () => {
           </BentoItem>
 
           {/* Visual Evidence - Trust Shortcut */}
-          <BentoItem colSpan={2} rowSpan={1} title="Live Metrics" className="min-h-[250px]">
+          <BentoItem colSpan={2} rowSpan={1} className="min-h-[250px]">
             <VisualEvidence />
           </BentoItem>
 
@@ -49,7 +49,7 @@ const App: React.FC = () => {
           </BentoItem>
 
           {/* Smart Diagnostic Tool */}
-          <BentoItem colSpan={1} rowSpan={2} title="System Diagnostic" className="border-primary md:col-start-4 md:row-start-1">
+          <BentoItem colSpan={1} rowSpan={2} className="border-primary md:col-start-4 md:row-start-1">
             <MiniAuditTool />
           </BentoItem>
 

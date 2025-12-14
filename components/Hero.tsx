@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
           AVAILABLE FOR Q4 2025
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95] tracking-tighter">
-          SCALING {country ? `${country.toUpperCase()} ` : ''}SME EFFICIENCY THROUGH <span className="bg-foreground text-background px-2">AI SYSTEMS</span>
+          SCALING <span className={`transition-opacity duration-700 ${country ? 'opacity-100' : 'opacity-0'}`}>{country ? `${country.toUpperCase()} ` : ''}</span>SME EFFICIENCY THROUGH <span className="bg-foreground text-background px-2">AI SYSTEMS</span>
         </h1>
         <p className="text-lg md:text-xl text-foreground/80 font-medium max-w-prose leading-relaxed">
           We replace manual operational overhead with autonomous neuro-symbolic frameworks. Automate 80% of your workflow in 30 days.

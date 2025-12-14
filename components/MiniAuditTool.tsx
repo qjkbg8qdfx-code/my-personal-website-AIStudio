@@ -7,6 +7,14 @@ export const MiniAuditTool: React.FC = () => {
     const [status, setStatus] = useState<'input' | 'processing' | 'result'>('input');
     const [formData, setFormData] = useState({ industry: '', bottleneck: '' });
     const [result, setResult] = useState<AuditResponse | null>(null);
+    const [downloadState, setDownloadState] = useState<'idle' | 'generating' | 'sent'>('idle');
+
+    const handleDownload = () => {
+        setDownloadState('generating');
+        setTimeout(() => {
+            setDownloadState('sent');
+        }, 1500);
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -154,10 +162,18 @@ export const MiniAuditTool: React.FC = () => {
                             </div>
 
                             <button
-                                className="w-full bg-white text-black font-bold py-3 mt-4 hover:bg-zinc-200 transition-colors flex items-center justify-between px-4 uppercase text-xs tracking-wider"
+                                onClick={handleDownload}
+                                disabled={downloadState !== 'idle'}
+                                className="w-full bg-white text-black font-bold py-3 mt-4 hover:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-500 transition-colors flex items-center justify-between px-4 uppercase text-xs tracking-wider"
                             >
-                                <span>Download_Report.pdf</span>
-                                <ArrowRight size={14} />
+                                <span>
+                                    {downloadState === 'idle' && 'Download_Report.pdf'}
+                                    {downloadState === 'generating' && 'GENERATING_PDF...'}
+                                    {downloadState === 'sent' && 'SENT_TO_INBOX'}
+                                </span>
+                                {downloadState === 'idle' && <ArrowRight size={14} />}
+                                {downloadState === 'generating' && <Loader2 size={14} className="animate-spin" />}
+                                {downloadState === 'sent' && <CheckCircle2 size={14} className="text-green-500" />}
                             </button>
                         </motion.div>
                     )}
