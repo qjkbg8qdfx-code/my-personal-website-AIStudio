@@ -5,21 +5,30 @@ const JsonLd: React.FC = () => {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
-        "name": "Systematic Authority",
+        "@type": "Person",
+        "name": "Alex System",
+        "jobTitle": "SME Systems Architect",
         "url": "https://systematic-authority.com",
-        "logo": "https://systematic-authority.com/logo.png",
-        "description": "Scaling SME Efficiency through autonomous neuro-symbolic frameworks.",
         "sameAs": [
           "https://www.linkedin.com/in/alexsystem",
           "https://twitter.com/alexsystem"
         ]
       },
       {
+        "@type": "Organization",
+        "name": "Systematic Authority",
+        "url": "https://systematic-authority.com",
+        "logo": "https://systematic-authority.com/logo.png",
+        "founder": {
+          "@id": "https://systematic-authority.com/#person"
+        },
+        "description": "Scaling SME Efficiency through autonomous neuro-symbolic frameworks."
+      },
+      {
         "@type": "Service",
-        "name": "Neuro-Symbolic Automation Audit",
+        "name": "The Trust Engine Methodology",
         "provider": { "@type": "Organization", "name": "Systematic Authority" },
-        "description": "Deconstructs manual workflows into atomic units for AI agent deployment.",
+        "description": "A proprietary neuro-symbolic automation audit that deconstructs manual workflows into atomic units for AI agent deployment.",
         "areaServed": "Global",
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -30,6 +39,13 @@ const JsonLd: React.FC = () => {
               "itemOffered": {
                 "@type": "Service",
                 "name": "72-Hour Workflow Decomposition"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Autonomous Agent Deployment"
               }
             }
           ]
